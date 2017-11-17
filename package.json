@@ -1,0 +1,43 @@
+{
+    "name": "vscode-extension-share",
+    "displayName": "Share for VSCode",
+    "description": "Universal collaborative editor",
+    "version": "0.0.1",
+    "publisher": "teddy-error",
+    "engines": {
+        "vscode": "^1.18.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:markdown"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.activate",
+                "title": "Start sharing"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "ejs": "^2.5.7",
+        "express": "^4.16.2",
+        "socket.io": "^2.0.4"
+    }
+}
