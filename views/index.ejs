@@ -3,27 +3,35 @@
   <head>
     <title>Editor Collab</title>
     <link rel="stylesheet"
-    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/seti.css">
   </head>
   <body>
     <pre>
       <h2><%= editor.fileName %></h2>
-      <code class="<%= editor.lang %>">
-        <% if (editor.text) { %>
-          <%= editor.text %>
-        <% } %>
-      </code>
+      <textarea name="code" id="textedit" cols="30" rows="10">
+        <%= editor.text %>
+      </textarea>
     </pre>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/keymap/vim.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      hljs.initHighlightingOnLoad();
+      var myCodeMirror = CodeMirror(function(elt) {
+        const preloadCode = document.querySelector('textarea');
+        preloadCode.parentNode.replaceChild(elt, preloadCode);
+      }, {
+        value: document.querySelector('textarea').value.trim(),
+        mode: 'javascript',
+        theme: 'seti',
+        keymap: 'vim',
+      });
       var socket = io();
-      socket.on('editMade', (newText) => {
-        let $code = $('code');
-        $code.text(newText);
-        hljs.highlightBlock(document.querySelector('code'));
+      socket.on('editMade', function(newText) {
+        myCodeMirror.setValue(newText);
       });
     </script>
   </body>

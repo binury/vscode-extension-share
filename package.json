@@ -11,14 +11,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:markdown"
+        "onCommand:extension.init"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.activate",
-                "title": "Start sharing"
+                "command": "extension.init",
+                "title": "Start a share session"
             }
         ]
     },

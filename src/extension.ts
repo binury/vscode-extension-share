@@ -1,3 +1,4 @@
+
 // The module 'vscode' contains the VS Code extensibility API
 // Import the necessary extensibility types to use in your code below
 import {window, commands, Disposable, ExtensionContext, StatusBarAlignment, StatusBarItem, TextDocument, workspace} from 'vscode';
@@ -6,8 +7,6 @@ const path = require('path');
 // This method is called when your extension is activated. Activation is
 // controlled by the activation events defined in package.json.
 export function activate(context: ExtensionContext) {
-    console.log('Congratulations, your extension "WordCount" is now active!');
-
     var server = require('http').createServer(app);
     var io = require('socket.io')(server);
     io.on('connection', function(client){
@@ -37,6 +36,14 @@ export function activate(context: ExtensionContext) {
     // Add to a list of disposables which are disposed when this extension is deactivated.
     context.subscriptions.push(controller);
     context.subscriptions.push(wordCounter);
+
+    var disposable = commands.registerCommand('extension.init', () => {
+        // The code you place here will be executed every time your command is executed
+
+        // Display a message box to the user
+        window.showInformationMessage('Sharing session started');
+    });
+    context.subscriptions.push(disposable);
 }
 
 class WordCounter {
