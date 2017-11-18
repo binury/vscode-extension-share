@@ -3,7 +3,7 @@ Share allows users to collaboratively edit documents without requiring editor ho
 
 ## Features
 
-> TODO Features, Gif
+![real-time editor sharing](https://github.com/teddy-error/vscode-extension-share/raw/master/share-animation.gif)
 
 ## Requirements
 ## Extension Settings
